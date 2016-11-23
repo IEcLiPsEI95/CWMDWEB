@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('cwdmApp', ['ui.router']);
+angular.module('cwmdApp', ['ui.router']);

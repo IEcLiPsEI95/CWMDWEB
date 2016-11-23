@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cwdmApp').config(function($urlRouterProvider, $stateProvider, $httpProvider){
+angular.module('cwmdApp').config(function($urlRouterProvider, $stateProvider, $httpProvider){
     $urlRouterProvider.otherwise('/');
     // $stateProvider
     // .state('main', {
@@ -16,4 +16,4 @@ angular.module('cwdmApp').config(function($urlRouterProvider, $stateProvider, $h
 
     $httpProvider.interceptors.push('authInterceptor');
   })
-.constant('API_URL', 'http://localhost/');
+.constant('API_URL', 'http://172.30.115.63:8080/');

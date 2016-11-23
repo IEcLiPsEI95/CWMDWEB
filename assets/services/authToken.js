@@ -37,7 +37,7 @@ angular.module('cwmdApp').factory('authToken', function ($window) {
       getToken: getToken,
       isAuthenticated: isAuthenticated,
       removeToken: removeToken,
-      setUseremail: setUseremail,
-      getUseremail: getUseremail
+      setUserEmail: setUserEmail,
+      getUserEmail: getUserEmail
     };
   });
