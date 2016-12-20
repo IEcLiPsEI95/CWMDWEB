@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWMD</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/main-style.css" rel="stylesheet" />
+
+</head>
+
+<body ng-app="cwmdApp" ng-controller="UserCtrl">
+    <!--  wrapper -->
+    <div id="wrapper">
+        <!-- navbar top -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+            <!-- navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                  <h1 style="color:white">CWMD</h1>
+                </a>
+            </div>
+            <!-- end navbar-header -->
+            <!-- navbar-top-links -->
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- main dropdown -->
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-3x"></i>
+                    </a>
+                    <!-- dropdown user-->
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="" ng-click="LogoutFunction()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                    <!-- end dropdown-user -->
+                </li>
+                <!-- end main dropdown -->
+            </ul>
+            <!-- end navbar-top-links -->
+
+        </nav>
+        <!-- end navbar top -->
+
+        <!-- navbar side -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <!-- user image section-->
+                        <div class="user-section">
+                            <div class="user-section-inner">
+                                <img src="assets/img/user.jpg" alt="">
+                            </div>
+                            <div class="user-info">
+                                <div>Jonny <strong>Deen</strong></div>
+                                <div class="user-text-online">
+                                    <span></span>Admin
+                                </div>
+                            </div>
+                        </div>
+                        <!--end user image section-->
+                        <li>
+                            <a href="blank.html">Document-Flows</a>
+                        </li>
+                        <li>
+                            <a href="crudusers.html"> Manage Users</a>
+                            <!-- second-level-items -->
+                        </li>
+                         <li>
+                            <a href="blank.html">Logs</a>
+                        </li>
+                    </ul>
+                    <!-- end side-menu -->
+                </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+        <!-- end navbar side -->
+        <!--  page-wrapper -->
+
+        <div id="page-wrapper">
+
+            <div class="row">
+                <!-- Page Header -->
+                <div class="col-lg-12">
+                    <h1 class="page-header">Manage Users</h1>
+                </div>
+                <!--End Page Header -->
+            </div>
+            <div>
+                <a id="add" href="#" class="btn btn-lg btn-primary">Add user</a>
+                <a id="get" href="#" class="btn btn-lg btn-primary">Update user</a>
+                <a id="delete" href="#" class="btn btn-lg btn-primary">Delete user</a>
+            </div>
+            <div class="col-md-5" id="form">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="label">Add user</h3>
+                    </div>
+                    <div class="panel-body" >
+                        <form role="form" ng-submit="crud">
+                            <fieldset>
+                                <input class="form-control" id="type" ng-model="type" type="hidden" autofocus>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="E-mail" id="email" ng-model="email" type="email" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" id="password" ng-model="password" type="password" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="First Name" id="first" ng-model="first" type="string" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Last Name" id="last" ng-model="last" type="string" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Permision" id="permision" ng-model="permision" type="string" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="CNP" id="cnp" ng-model="cnp" type="string" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Phone" id="phone" ng-model="phone" type="string" value="">
+                                </div>
+                                <button type="submit" class="btn btn-lg btn-success btn-block" id="submitbutton">Add </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="table">
+                <tr class="thead"><td>Id</td><td>Username</td><td>Permissions</td><td>Lastname</td><td>First Name</td><td>CNP</td><td>Phone</td></tr>
+                <tr ng-repeat="x in users" ng-click="go(x);" >
+                    <td>{{ x.id }}</td>
+                    <td>{{ x.username }}</td>
+                    <td>{{ x.permissions }}</td>
+                    <td>{{ x.lastname }}</td>
+                    <td>{{ x.firstname }}</td>
+                    <td>{{ x.cnp }}</td>
+                    <td>{{ x.phone }}</td>
+                </tr>
+            </table>
+
+
+        </div>
+        <!-- end page-wrapper -->
+
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="app.js"></script>
+    <script src="appconfig.js"></script>
+	<script src="assets/services/authToken.js"></script>
+	<script src="assets/services/auth.js"></script>
+	<script src="assets/services/authinterceptor.js"></script>
+    <script src="assets/scripts/crudusers.js"></script>
+    <script src="assets/scripts/userclick.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script>
+        function toggleAll()
+        {
+            $( "#form" ).hide();
+            $( "#email" ).hide();
+            $( "#password" ).hide();
+            $( "#first" ).hide();
+            $( "#last" ).hide();
+            $( "#permision" ).hide();
+            $( "#cnp" ).hide();
+            $( "#phone" ).hide();
+        }
+
+        $( "#add" ).click(function() {
+            toggleAll();
+            $( "#form" ).show();
+            $( "#label" ).text("Add user");
+            $( "#email" ).show();
+            $( "#password" ).show();
+            $( "#first" ).show();
+            $( "#last" ).show();
+            $( "#permision" ).show();
+            $( "#cnp" ).show();
+            $( "#phone" ).show();
+            $( "#submitbutton" ).text("Add");
+            $( "#type").val("add");
+        });
+        $( "#get" ).click(function() {
+            toggleAll();
+            $( "#form" ).show();
+            $( "#label" ).text("Update user");
+            $( "#email" ).show();
+            $( "#password" ).show();
+            $( "#first" ).show();
+            $( "#last" ).show();
+            $( "#permision" ).show();
+            $( "#cnp" ).show();
+            $( "#phone" ).show();
+            $( "#type").val("update");
+            $( "#submitbutton" ).text("Update");
+            $( "#type").val("get");
+        });
+        $( "#delete" ).click(function() {
+            toggleAll();
+            $( "#form" ).show();
+            $( "#label" ).text("Delete user");
+            $( "#email" ).show();
+            $( "#submitbutton" ).text("Delete");
+            $( "#type").val("delete");
+        });
+        $( document ).ready(function ()
+        {
+            toggleAll();
+        });
+    </script>
+    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+</body>
+
+</html>
