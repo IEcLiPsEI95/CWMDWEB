@@ -46,11 +46,18 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
         console.log(url);
         $http.post(url, {username: $scope.email, password: $scope.password, permissions: $scope.permissions, firstName: $scope.first, lastName: $scope.last, cnp: $scope.cnp, phone: $scope.phone})
           .success(function(res){
+              if(angular.equals(res.status,"200"))
+              {
                     $window.alert("The user has been "+request+"-ed");
                     $window.location.reload(true);
+              }
+              else
+              {
+                  $window.alert("Error "+res.message);
+              }
           })
           .error(function(err){
-            console.log(err);
+            $window.alert(err);
           });
     };
 });        
