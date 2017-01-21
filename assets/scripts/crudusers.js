@@ -1,17 +1,11 @@
 'use strict';
-  
+
 angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootScope, $window, authToken, $http, API_URL) {
     if(authToken.getToken()==null || authToken.getToken().length == 0)
     {
         $window.location.href = "index.html";
     }
-    $scope.LogoutFunction = function(){
-        authToken.removeToken();
-        url = API_URL + "auth/logout";
-        $http.post(url).success(function(res){
-            $window.location.href = "index.html";
-        });
-    }
+
     var url = API_URL + "auth/getallusers";
     $http.get(url)
     .success(function (response) {
@@ -60,6 +54,4 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
             $window.alert(err);
           });
     };
-});        
-           
-           
+});
