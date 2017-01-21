@@ -21,12 +21,16 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
             $scope.users = [];
         });
     $scope.go = function(x){
-        $scope.email = x.username;
-        $scope.first = x.firstName;
-        $scope.last = x.lastName;
-        $scope.permissions = x.permissions;
-        $scope.cnp = x.cnp;
-        $scope.phone = x.phone;
+        request = angular.element(document.querySelector('#request'))[0].value;
+        if(!angular.equals(request,"add"))
+        {
+            $scope.email = x.username;
+            $scope.first = x.firstName;
+            $scope.last = x.lastName;
+            $scope.permissions = x.permissions;
+            $scope.cnp = x.cnp;
+            $scope.phone = x.phone;
+        }
     }
     $scope.submit = function(){
         url = API_URL + "auth/";

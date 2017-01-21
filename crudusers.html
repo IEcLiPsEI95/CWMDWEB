@@ -193,6 +193,15 @@
             $( "#cnp" ).hide();
             $( "#phone" ).hide();
             $( "#request").hide();
+            $( "#email" ).val("");
+            $( "#password" ).val("");
+            $( "#first" ).val("");
+            $( "#last" ).val("");
+            $( "#permissions" ).val("");
+            $( "#cnp" ).val("");
+            $( "#phone" ).val("");
+            $( "#request").val("");
+            $( "#email" )[0].readOnly = false;
         }
 
         $( "#add" ).click(function() {
@@ -214,7 +223,7 @@
             $( "#form" ).show();
             $( "#label" ).text("Update user");
             $( "#email" ).show();
-            $( "#password" ).show();
+            $( "#email" )[0].readOnly = true;
             $( "#first" ).show();
             $( "#last" ).show();
             $( "#permissions" ).show();
