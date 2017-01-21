@@ -46,7 +46,7 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
           .success(function(res){
               if(angular.equals(res.status,"200"))
               {
-                    $window.alert("The user has been "+request+"-ed");
+                    $window.alert("The user has been "+request+"ed");
                     $window.location.reload(true);
               }
               else

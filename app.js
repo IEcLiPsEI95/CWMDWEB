@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('cwmdApp', ['ui.router']);
+angular.module('cwmdApp', ['ui.router','angularFileUpload']);

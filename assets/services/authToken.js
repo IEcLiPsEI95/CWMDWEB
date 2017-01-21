@@ -2,8 +2,8 @@
 angular.module('cwmdApp').factory('authToken', function ($window) {
     var storage = $window.localStorage;
     var cachedToken;
-    var cachedEmail;
-    var userEmail = 'userEmail';
+    var cachedUser;
+    var userDetail = 'userDetail';
     var userToken = 'userToken';
     var setToken = function(token){
         cachedToken = token;
@@ -22,22 +22,22 @@ angular.module('cwmdApp').factory('authToken', function ($window) {
         cachedToken = null;
         storage.removeItem(userToken);
       };
-    var setUserEmail = function(email){
-      cachedEmail = email;
-      storage.setItem(userEmail, email);
+    var setUser = function(user){
+      cachedUser = user;
+      storage.setItem(userDetail, user);
     };
-    var getUserEmail = function(){
-      if(!cachedEmail){
-        cachedEmail = storage.getItem(userEmail);
+    var getUser = function(){
+      if(!cachedUser){
+        cachedUser = storage.getItem(userDetail);
       }
-      return cachedEmail;
+      return cachedUser;
     };
     return{
       setToken: setToken,
       getToken: getToken,
       isAuthenticated: isAuthenticated,
       removeToken: removeToken,
-      setUserEmail: setUserEmail,
-      getUserEmail: getUserEmail
+      setUser: setUser,
+      getUser: getUser
     };
   });

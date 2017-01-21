@@ -31,8 +31,8 @@ limitations under the License.*/
 
  #wrapper {
     width: 100%;
-    margin-top: 55px!important; 
-    background-color:#04B173; 
+    margin-top: 55px!important;
+    background-color:#04B173;
 }
 
 #page-wrapper {
@@ -43,7 +43,7 @@ limitations under the License.*/
 
 
 
-    
+
 
 .navbar-static-side ul li {
     border-bottom:1px solid #84B899 !important;
@@ -327,3 +327,19 @@ table.dataTable thead .sorting:after {
     margin: 15px 0;
 }
 
+.myFileUpload {
+  position: relative;
+  overflow: hidden;
+  float: left;
+  clear: left;
+}
+.myFileUpload input[type="file"] {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  font-size: 100px;
+  filter: alpha(opacity=0);
+  cursor: pointer;
+}

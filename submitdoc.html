@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CWMD-User</title>
+    <title>CWMD</title>
     <!-- Core CSS - Include with every page -->
     <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/main-style.css" rel="stylesheet" />
-    <!-- Page-Level CSS -->
-    <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
-   </head>
-<body ng-app="cwmdApp">
+</head>
+
+<body ng-app="cwmdApp" >
     <!--  wrapper -->
     <div id="wrapper">
         <!-- navbar top -->
@@ -28,13 +28,14 @@
                 </button>
                 <a class="navbar-brand" href="index.html">
                   <h1 style="color:white">CWMD</h1>
-                    <!-- <img src="assets/img/logo.png" alt="" /> -->
                 </a>
             </div>
             <!-- end navbar-header -->
             <!-- navbar-top-links -->
-            <ul class="nav navbar-top-links navbar-right" ng-controller="LogoutCtrl">
+            <ul class="nav navbar-top-links navbar-right">
                 <!-- main dropdown -->
+
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-3x"></i>
@@ -66,27 +67,27 @@
                             <div class="user-section-inner">
                                 <img src="assets/img/user.jpg" alt="">
                             </div>
-                            <div class="user-info">
-
+                            <div class="user-info" ng-controller="LoginCtrl">
+                                <div id="userdetail" ng-model="userdetail"> <strong>{{userdetail.name}}</strong></div>
                             </div>
                         </div>
                         <!--end user image section-->
-                    <li>
-                        <a href="blank.html">Document-Flows</a>
-                    </li>
-                    <li>
-                        <a href="crudusers.html"> Manage Users</a>
-                        <!-- second-level-items -->
-                    </li>
-                     <li>
-                        <a href="blank.html">Logs</a>
-                    </li>
-                    <li>
-                       <a href="submitdoc.html">Submit Documents</a>
-                   </li>
-                </ul>
-                <!-- end side-menu -->
-            </div>
+                        <li>
+                            <a href="blank.html">Document-Flows</a>
+                        </li>
+                        <li>
+                            <a href="crudusers.html"> Manage Users</a>
+                            <!-- second-level-items -->
+                        </li>
+                         <li>
+                            <a href="blank.html">Logs</a>
+                        </li>
+                        <li>
+                           <a href="submitdoc.html">Submit Documents</a>
+                       </li>
+                    </ul>
+                    <!-- end side-menu -->
+                </div>
             <!-- end sidebar-collapse -->
         </nav>
         <!-- end navbar side -->
@@ -96,35 +97,63 @@
             <div class="row">
                 <!-- Page Header -->
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blank Page</h1>
+                    <h1 class="page-header">Submit Document</h1>
                 </div>
                 <!--End Page Header -->
             </div>
+            <!-- <div class="col-md-5" id="form"> -->
+                    <div class="panel-body">
+                      <div >
+                        <ul>
+                          <!-- <li ng-repeat="document in documents">
+                            <a href="" ng-click="showbuttons()">
+                              {{document.name}}
+                            </li> -->
+                          </ul>
+                      </div>
 
+                      <div class="col-md-2" style="float:right" ng-show="true">
+                            <div ng-controller="UploadCtrl">
+                              <label class="myFileUpload">
+                                <img src="http://wscont1.apps.microsoft.com/winstore/1x/c37a9d99-6698-4339-acf3-c01daa75fb65/Icon.13385.png" alt="" />
+                                <input style="width: 100%; height: 100%" file-input="files" type="file" multiple />
+                              </label>
+                              <button class="btn btn-lg btn-success btn-block" ng-click = "upload()">Upload</button>
+                            </div>
+
+                            <button type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:5px" id="download">Download </button>
+                            <button type="submit" class="btn btn-lg btn-success btn-block" id="markfinal">Mark as final </button>
+                      </div>
+                    </div>
+                <!-- </div> -->
+            </div>
 
 
         </div>
         <!-- end page-wrapper -->
-
-    </div>
     <!-- end wrapper -->
 
+
+
+    </div>
+
     <!-- Core Scripts - Include with every page -->
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <script src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
     <script src="app.js"></script>
     <script src="appconfig.js"></script>
-    <script src="assets/services/authToken.js"></script>
-    <script src="assets/services/auth.js"></script>
-    <script src="assets/services/authinterceptor.js"></script>
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
+	  <script src="assets/services/authToken.js"></script>
+	  <script src="assets/services/auth.js"></script>
+	  <script src="assets/services/authinterceptor.js"></script>
+    <script src="assets/scripts/crudusers.js"></script>
+    <script src="assets/scripts/submitdoc.js"></script>
+    <script src="assets/scripts/userclick.js"></script>
+    <script src="assets/directives/uploaddir.js"></script>
+    <script src="assets/scripts/upload.js"></script>
     <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="assets/scripts/logout.js"></script>
-
-    <!-- Page-Level Plugin Scripts-->
-    <script src="assets/plugins/morris/raphael-2.1.0.min.js"></script>
 
 </body>
 
