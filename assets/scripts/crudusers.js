@@ -21,28 +21,49 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
             $scope.email = x.username;
             $scope.first = x.firstName;
             $scope.last = x.lastName;
-            $scope.permissions = x.permissions;
+            if(x.permissions | 1)
+            {
+                $scope.permissions = "Admin";
+            }
+            else if(x.permissions | 6)
+            {
+                $scope.permissions = "Admin";
+            }
+            else if(x.permissions | 4)
+            {
+                $scope.permissions = "Basic User";
+            }
             $scope.cnp = x.cnp;
             $scope.phone = x.phone;
+            $scope.group = x.idgroup;
         }
     }
     $scope.submit = function(){
         url = API_URL + "auth/";
         request = angular.element(document.querySelector('#request'))[0].value;
+        flags = 4;
         if(angular.equals(request,"add"))
         {
             url+= "adduser"
         }
-        if(angular.equals(request,"delete"))
+        else if(angular.equals(request,"delete"))
         {
             url+= "deluser"
         }
-        if(angular.equals(request,"update"))
+        else if(angular.equals(request,"update"))
         {
             url+= "updateuser"
         }
+        if(angular.equals($scope.permissions,"admin"))
+        {
+            flags = 1;
+        }
+        else if(angular.equals($scope.permissions,"manager"))
+        {
+            flags = 6;
+        }
         console.log(url);
-        $http.post(url, {username: $scope.email, password: $scope.password, permissions: $scope.permissions, firstName: $scope.first, lastName: $scope.last, cnp: $scope.cnp, phone: $scope.phone})
+        $http.post(url, {username: $scope.email, password: $scope.password, permissions: flags, firstName: $scope.first, lastName: $scope.last, cnp: $scope.cnp, phone: $scope.phone, idgroup: $scope.group})
           .success(function(res){
               if(angular.equals(res.status,"200"))
               {

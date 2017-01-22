@@ -14,7 +14,7 @@
 
 </head>
 
-<body ng-app="cwmdApp" ng-controller="UserCtrl">
+<body>
     <!--  wrapper -->
     <div id="wrapper">
         <!-- navbar top -->
@@ -43,10 +43,6 @@
                     </a>
                     <!-- dropdown user-->
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
                         <li class="divider"></li>
                         <li><a href="" ng-click="LogoutFunction()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                         </li>
@@ -87,12 +83,15 @@
                             <a href="crudusers.html"> Manage Users</a>
                             <!-- second-level-items -->
                         </li>
-                         <li>
+                        <li>
                             <a href="blank.html">Logs</a>
                         </li>
                         <li>
                            <a href="submitdoc.html">Submit Documents</a>
-                       </li>
+                        </li>
+                        <li>
+                           <a href="signdocs.html">Sign Documents</a>
+                        </li>
                     </ul>
                     <!-- end side-menu -->
                 </div>
@@ -101,7 +100,7 @@
         <!-- end navbar side -->
         <!--  page-wrapper -->
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" ng-app="cwmdApp" ng-controller="UserCtrl">
 
             <div class="row">
                 <!-- Page Header -->
@@ -137,13 +136,18 @@
                                     <input class="form-control" placeholder="Last Name" id="last" ng-model="last" type="string" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Permissions" id="permissions" ng-model="permissions" type="string" value="">
+                                    <select class="form-control" id="permissions" ng-model="permissions">
+                                        <option value="admin">Admin</option><option value="manager">Manager</option><option value="user">Basic User</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="CNP" id="cnp" ng-model="cnp" type="string" value="">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Phone" id="phone" ng-model="phone" type="string" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Group Name" id="group" ng-model="group" type="string" value="">
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-success btn-block" id="submitbutton">Add </button>
                             </fieldset>
@@ -152,9 +156,9 @@
                 </div>
             </div>
 
-            <table class="table">
-                <tr class="thead"><td>Id</td><td>Username</td><td>Permissions</td><td>Lastname</td><td>First Name</td><td>CNP</td><td>Phone</td></tr>
-                <tr ng-repeat="x in users" ng-click="go(x);" >
+            <table class="table table-hover">
+                <tr class="thead"><td>Id</td><td>Username</td><td>Permissions</td><td>Lastname</td><td>First Name</td><td>CNP</td><td>Phone</td><td>Group Name</td></tr>
+                <tr class="tbody" ng-repeat="x in users" ng-click="go(x);" >
                     <td>{{ x.id }}</td>
                     <td>{{ x.username }}</td>
                     <td>{{ x.permissions }}</td>
@@ -162,6 +166,7 @@
                     <td>{{ x.firstName }}</td>
                     <td>{{ x.cnp }}</td>
                     <td>{{ x.phone }}</td>
+                    <td>{{ x.idgroup }}</td>
                 </tr>
             </table>
 
@@ -176,6 +181,7 @@
     <script src="assets/plugins/jquery-1.10.2.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
     <script src="app.js"></script>
     <script src="appconfig.js"></script>
 	<script src="assets/services/authToken.js"></script>
@@ -196,6 +202,7 @@
             $( "#cnp" ).hide();
             $( "#phone" ).hide();
             $( "#request").hide();
+            $( "#group").hide();
             $( "#email" ).val("");
             $( "#password" ).val("");
             $( "#first" ).val("");
@@ -203,7 +210,7 @@
             $( "#permissions" ).val("");
             $( "#cnp" ).val("");
             $( "#phone" ).val("");
-            $( "#request").val("");
+            $( "#group").val("");
             $( "#email" )[0].readOnly = false;
         }
 
@@ -218,6 +225,7 @@
             $( "#permissions" ).show();
             $( "#cnp" ).show();
             $( "#phone" ).show();
+            $( "#group").show();
             $( "#submitbutton" ).text("Add");
             $( "#request").val("add");
         });
@@ -232,6 +240,7 @@
             $( "#permissions" ).show();
             $( "#cnp" ).show();
             $( "#phone" ).show();
+            $( "#group").show();
             $( "#request").val("update");
             $( "#submitbutton" ).text("Update");
         });
