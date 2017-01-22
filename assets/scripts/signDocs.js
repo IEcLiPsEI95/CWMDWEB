@@ -5,7 +5,7 @@ angular.module('cwmdApp').controller('SignDocsCtrl', function($scope, auth, $roo
     $http.get(url)
     .success(function (response) {
         if(angular.equals(response.status,"200"))
-            $scope.docs = response.data;
+            $scope.docs = response.message;
         else
           $scope.docs = [];
         });
@@ -23,18 +23,18 @@ angular.module('cwmdApp').controller('SignDocsCtrl', function($scope, auth, $roo
 //        request = angular.element(document.querySelector('#request'))[0].value;
     }
     $scope.download = function(x){
-        var url = API_URL + "docs/download/"+x.file +"?type="+x.type;
+        var url = API_URL + "docs/download/"+x.baseName +"?type="+x.idDocumentType;
         $http.get(url).success(function(response) {
                 //$scope.$emit('downloaded', response.data);
                 console.log("downloaded")
                 var a = document.createElement("a"),
-                    file = new Blob([response.data], {type: "text/txt"});
+                    file = new Blob([response.message], {type: "text/txt"});
                 if (window.navigator.msSaveOrOpenBlob) // IE10+
-                    window.navigator.msSaveOrOpenBlob(file, x.file);
+                    window.navigator.msSaveOrOpenBlob(file, x.baseName);
                 else { // Others
                     var url = URL.createObjectURL(file);
                     a.href = url;
-                    a.download = x.file;
+                    a.download = x.baseName;
                     document.body.appendChild(a);
                     a.click();
                     setTimeout(function() {
