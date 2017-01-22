@@ -4,7 +4,7 @@ angular.module('cwmdApp').directive('fileInput', ['$parse', function ($parse) {
                link: function(scope, elm, attrs) {
                   elm.bind('change', function(){
                      $parse(attrs.fileInput)
-                     .assign(scope.elm[0].files)
+                     .assign(scope,elm[0].files)
                      scope.$apply()
                   });
                }

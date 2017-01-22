@@ -5,7 +5,7 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
     {
         $window.location.href = "index.html";
     }
-
+    $scope.userdetail = authToken.getUser();
     var url = API_URL + "auth/getallusers";
     $http.get(url)
     .success(function (response) {

@@ -4,11 +4,17 @@ angular.module('cwmdApp').controller('LoginCtrl', function ($scope, auth, $rootS
     $scope.submit = function(){
     auth.login($scope.email, $scope.password)
       .success(function(res){
+          console.log(res);
           $window.location.href = 'user.html';
       })
       .error(function(err){
-        alert(err.message);
-        console.log(err.message);
+        if(err == null){
+          alert("Host unreachable.");
+        }
+        else{
+          alert(err.message);
+          console.log(err.message);
+        }
       });
     };
 });

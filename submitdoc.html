@@ -13,7 +13,7 @@
     <link href="assets/css/main-style.css" rel="stylesheet" />
 </head>
 
-<body ng-app="cwmdApp" >
+<body ng-app="cwmdApp" ng-controller="SubmitDocCtrl" ng-cloak>
     <!--  wrapper -->
     <div id="wrapper">
         <!-- navbar top -->
@@ -32,7 +32,7 @@
             </div>
             <!-- end navbar-header -->
             <!-- navbar-top-links -->
-            <ul class="nav navbar-top-links navbar-right">
+            <ul class="nav navbar-top-links navbar-right" ng-controller="LogoutCtrl">
                 <!-- main dropdown -->
 
 
@@ -67,8 +67,8 @@
                             <div class="user-section-inner">
                                 <img src="assets/img/user.jpg" alt="">
                             </div>
-                            <div class="user-info" ng-controller="LoginCtrl">
-                                <div id="userdetail" ng-model="userdetail"> <strong>{{userdetail.name}}</strong></div>
+                            <div class="user-info">
+                                <div ng-model="userdetail"> <strong>{{userdetail}}</strong></div>
                             </div>
                         </div>
                         <!--end user image section-->
@@ -85,6 +85,12 @@
                         <li>
                            <a href="submitdoc.html">Submit Documents</a>
                        </li>
+                       <li>
+                           <a href="blank.html">Manage Documents</a>
+                       </li>
+                       <li>
+                          <a href="blank.html">Charts</a>
+                      </li>
                     </ul>
                     <!-- end side-menu -->
                 </div>
@@ -103,26 +109,27 @@
             </div>
             <!-- <div class="col-md-5" id="form"> -->
                     <div class="panel-body">
-                      <div >
-                        <ul>
-                          <!-- <li ng-repeat="document in documents">
-                            <a href="" ng-click="showbuttons()">
-                              {{document.name}}
-                            </li> -->
-                          </ul>
-                      </div>
 
-                      <div class="col-md-2" style="float:right" ng-show="true">
-                            <div ng-controller="UploadCtrl">
+                      <div class="col-md-2" style="float:right" ng-show="showButtons" >
+
+                            <form ng-controller="UploadCtrl">
                               <label class="myFileUpload">
                                 <img src="http://wscont1.apps.microsoft.com/winstore/1x/c37a9d99-6698-4339-acf3-c01daa75fb65/Icon.13385.png" alt="" />
-                                <input style="width: 100%; height: 100%" file-input="files" type="file" multiple />
+                                <input type="file" file-input="files" multiple />
                               </label>
-                              <button class="btn btn-lg btn-success btn-block" ng-click = "upload()">Upload</button>
-                            </div>
+                              <button class="btn btn-lg btn-success btn-block" ng-click="upload()">Upload</button>
+                            </form>
 
                             <button type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:5px" id="download">Download </button>
                             <button type="submit" class="btn btn-lg btn-success btn-block" id="markfinal">Mark as final </button>
+                      </div>
+                      <div >
+                        <ul class="templateDocs">
+                          <li ng-repeat="document in documents">
+                            <a href="" ng-click="showbuttons()">
+                              {{document.name}}
+                            </li>
+                          </ul>
                       </div>
                     </div>
                 <!-- </div> -->
@@ -140,18 +147,19 @@
     <!-- Core Scripts - Include with every page -->
     <script src="assets/plugins/jquery-1.10.2.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="app.js"></script>
     <script src="appconfig.js"></script>
 	  <script src="assets/services/authToken.js"></script>
+    <script src="assets/scripts/login.js"></script>
 	  <script src="assets/services/auth.js"></script>
 	  <script src="assets/services/authinterceptor.js"></script>
-    <script src="assets/scripts/crudusers.js"></script>
+    <script src="assets/scripts/logout.js"></script>
     <script src="assets/scripts/submitdoc.js"></script>
-    <script src="assets/scripts/userclick.js"></script>
-    <script src="assets/directives/uploaddir.js"></script>
     <script src="assets/scripts/upload.js"></script>
+    <script src="assets/directives/uploaddir.js"></script>
+
     <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
 

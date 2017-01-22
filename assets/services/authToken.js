@@ -23,8 +23,8 @@ angular.module('cwmdApp').factory('authToken', function ($window) {
         storage.removeItem(userToken);
       };
     var setUser = function(user){
-      cachedUser = user;
-      storage.setItem(userDetail, user);
+      cachedUser = user.lastName;
+      storage.setItem(userDetail, user.lastName);
     };
     var getUser = function(){
       if(!cachedUser){
