@@ -35,13 +35,13 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
             }
             $scope.cnp = x.cnp;
             $scope.phone = x.phone;
-            $scope.group = x.idgroup;
+            $scope.groupName = x.groupName;
         }
     }
     $scope.submit = function(){
         url = API_URL + "auth/";
         request = angular.element(document.querySelector('#request'))[0].value;
-        flags = 4;
+        var flags = 4;
         if(angular.equals(request,"add"))
         {
             url+= "adduser"
@@ -63,7 +63,7 @@ angular.module('cwmdApp').controller('UserCtrl', function($scope, auth, $rootSco
             flags = 6;
         }
         console.log(url);
-        $http.post(url, {username: $scope.email, password: $scope.password, permissions: flags, firstName: $scope.first, lastName: $scope.last, cnp: $scope.cnp, phone: $scope.phone, idgroup: $scope.group})
+        $http.post(url, {username: $scope.email, password: $scope.password, permissions: flags, firstName: $scope.first, lastName: $scope.last, cnp: $scope.cnp, phone: $scope.phone, groupName: $scope.groupName})
           .success(function(res){
               if(angular.equals(res.status,"200"))
               {

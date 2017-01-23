@@ -91,6 +91,9 @@
                        <li>
                           <a href="blank.html">Charts</a>
                       </li>
+                      <li>
+                           <a href="signdocs.html">Sign Documents</a>
+                      </li>
                     </ul>
                     <!-- end side-menu -->
                 </div>
@@ -113,20 +116,17 @@
                       <div class="col-md-2" style="float:right" ng-show="showButtons" >
 
                             <form ng-controller="UploadCtrl">
-                              <label class="myFileUpload">
-                                <img src="http://wscont1.apps.microsoft.com/winstore/1x/c37a9d99-6698-4339-acf3-c01daa75fb65/Icon.13385.png" alt="" />
-                                <input type="file" file-input="files" multiple />
-                              </label>
-                              <button class="btn btn-lg btn-success btn-block" ng-click="upload()">Upload</button>
+                            <input type="file" id="file" name="file"/>
+                              <button class="btn btn-lg btn-success btn-block" ng-click="add()">Upload</button>
                             </form>
 
-                            <button type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:5px" id="download">Download </button>
+                            <button type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:5px" id="download" ng-click="download()">Download </button>
                             <button type="submit" class="btn btn-lg btn-success btn-block" id="markfinal">Mark as final </button>
                       </div>
                       <div >
                         <ul class="templateDocs">
                           <li ng-repeat="document in documents">
-                            <a href="" ng-click="showbuttons()">
+                            <a href="" ng-click="showbuttons();change($index)">
                               {{document.name}}
                             </li>
                           </ul>

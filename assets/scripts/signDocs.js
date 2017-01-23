@@ -17,18 +17,25 @@ angular.module('cwmdApp').controller('SignDocsCtrl', function($scope, auth, $roo
             doc.rows[doc.last].cells[5].childNodes[0].style.visibility="hidden";
         }
         doc.rows[index+1].cells[3].childNodes[0].style.visibility="visible";
-        doc.rows[index+1].cells[4].childNodes[0].style.visibility="visible";
-        doc.rows[index+1].cells[5].childNodes[0].style.visibility="visible";
+        if(x.status!=4)
+        {
+            doc.rows[index+1].cells[4].childNodes[0].style.visibility="visible";
+            doc.rows[index+1].cells[5].childNodes[0].style.visibility="visible";
+        }
         doc.last =index+1;
 //        request = angular.element(document.querySelector('#request'))[0].value;
     }
     $scope.download = function(x){
         var url = API_URL + "docs/download/"+x.baseName +"?type="+x.idDocumentType;
-        $http.get(url).success(function(response) {
+        $http({
+            url:url,
+            method:"GET",
+            responseType: 'blob'
+            }).success(function(response) {
                 //$scope.$emit('downloaded', response.data);
                 console.log("downloaded")
                 var a = document.createElement("a"),
-                    file = new Blob([response.message], {type: "text/txt"});
+                    file = new Blob([response], {type: "text/txt"});
                 if (window.navigator.msSaveOrOpenBlob) // IE10+
                     window.navigator.msSaveOrOpenBlob(file, x.baseName);
                 else { // Others
@@ -48,12 +55,16 @@ angular.module('cwmdApp').controller('SignDocsCtrl', function($scope, auth, $roo
         var url = API_URL + "docs/sign";
         $http.post(url,x.id).then(function(response) {
             $scope.docs.splice(index, 1);
+            doc.last=null;
         });
+        
     }
     $scope.reject = function(index, x){
         var url = API_URL + "docs/reject";
         $http.post(url,x.id).then(function(response) {
             $scope.docs.splice(index, 1);
+            doc.last=null;
         });
+        
     }
 });

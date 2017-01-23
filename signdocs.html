@@ -10,10 +10,11 @@
     <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/main-style.css" rel="stylesheet" />
-
+    <!-- Page-Level CSS -->
+    <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
 </head>
 
-<body ng-app="cwmdApp">
+<body ng-app="cwmdApp" ng-cloak>
     <!--  wrapper -->
     <div id="wrapper">
         <!-- navbar top -->
@@ -34,8 +35,6 @@
             <!-- navbar-top-links -->
             <ul class="nav navbar-top-links navbar-right" ng-controller="LogoutCtrl">
                 <!-- main dropdown -->
-
-
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-3x"></i>
@@ -68,10 +67,7 @@
                                 <img src="assets/img/user.jpg" alt="">
                             </div>
                             <div class="user-info">
-                                <div>Jonny <strong>Deen</strong></div>
-                                <div class="user-text-online">
-                                    <span></span>Admin
-                                </div>
+                                <div ng-model="userdetail"> <strong>{{userdetail}}</strong></div>
                             </div>
                         </div>
                         <!--end user image section-->
@@ -87,10 +83,16 @@
                         </li>
                         <li>
                            <a href="submitdoc.html">Submit Documents</a>
-                        </li>
-                        <li>
+                       </li>
+                       <li>
+                           <a href="blank.html">Manage Documents</a>
+                       </li>
+                       <li>
+                          <a href="blank.html">Charts</a>
+                      </li>
+                      <li>
                            <a href="signdocs.html">Sign Documents</a>
-                        </li>
+                      </li>
                     </ul>
                     <!-- end side-menu -->
                 </div>
@@ -108,9 +110,9 @@
                 <!--End Page Header -->
             </div>
             <table id="doc" class="table table-hover">
-                <tr class="thead"><td>Nume document</td><td>Utilizator</td><td>Tip</td></tr>
+                <tr class="thead"><td>Nume document</td><td>Utilizator</td><td>Status</td></tr>
                 <tr class="tbody" ng-repeat="x in docs" ng-click="go($index, x);" >
-                    <td>{{ x.baseName }}</td><td>{{ x.user }}</td><td>{{ x.idDocumentType }}</td>
+                    <td>{{ x.baseName }}</td><td>{{ x.user }}</td><td>{{ x.status }}</td>
                     <td><button class="btn btn-info btn-block invisible" ng-click="download(x)">Download</button></td>
                     <td><button class="btn btn-success btn-block invisible" ng-click="sign($index,x)">Sign</button></td>
                     <td><button class="btn btn-danger btn-block invisible" ng-click="reject($index,x)">Reject</button></td>
@@ -125,18 +127,21 @@
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
     <script src="app.js"></script>
     <script src="appconfig.js"></script>
-	<script src="assets/services/authToken.js"></script>
-	<script src="assets/services/auth.js"></script>
-	<script src="assets/services/authinterceptor.js"></script>
-	<script src="assets/scripts/signDocs.js"></script>
-    <script src="assets/scripts/siminta.js"></script>
+    <script src="assets/services/authToken.js"></script>
+    <script src="assets/services/auth.js"></script>
+    <script src="assets/services/login.js"></script>
+    <script src="assets/services/authinterceptor.js"></script>
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="assets/scripts/logout.js"></script>
+    <script src="assets/scripts/signdocs.js"></script>
     <!-- Page-Level Plugin Scripts-->
     <script src="assets/plugins/morris/raphael-2.1.0.min.js"></script>
 

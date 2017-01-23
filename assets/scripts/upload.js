@@ -1,28 +1,28 @@
 'use strict';
 
-angular.module('cwmdApp').controller('UploadCtrl', ['$scope', '$http', function($scope, $http) {
-  $scope.filesChanged = function(elm){
-    $scope.files=elm.files;
-    $scope.$apply();
-  }
-  $scope.upload = function(){
-    var url = 'http://192.168.43.73:8080/docs/upload';
-    var fd = new FormData()
-    angular.forEach($scope.files, function(file){
-      fd.append('file',file)
-    })
-
-    console.log(fd);
-    $http.post(url,{fd:fd, type: '1'},{
-      transformRequest:angular.identity,
-      headers:{'Content-Type': 'multipart/form-data; boundry="---------------------------7da24f2e50046"'}
+angular.module('cwmdApp').controller('UploadCtrl', ['$scope', '$http', "$window", function($scope, $http, $window) {
+    $scope.filesChanged = function(elm){
+        $scope.files=elm.files;
+        $scope.$apply();
+    }
+    $scope.add = function(){
+      var f = document.getElementById('file').files[0],
+          r = new FileReader();
+      r.onloadend = function(e){
+        var data = e.target.result;
+        //send your binary data via $http or $resource or do anything else with it
+      }
+      r.readAsBinaryString(f);
+        var url = 'http://localhost:8080/docs/upload?type=1';
+      $http.post(url,r.result,{
+      headers:{'Content-Type': 'text/plain'}
     })
     .success(function(d){
-      console.log(d);
+      $window.alert("Fisier uploadat");
     })
     .error(function(err){
         console.log(err);
 
     });
-  }
+    }
 }]);

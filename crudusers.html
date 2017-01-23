@@ -150,7 +150,7 @@
                                     <input class="form-control" placeholder="Phone" id="phone" ng-model="phone" type="string" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Group Name" id="group" ng-model="group" type="string" value="">
+                                    <input class="form-control" placeholder="Group Name" id="groupName" ng-model="groupName" type="string" value="">
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-success btn-block" id="submitbutton">Add </button>
                             </fieldset>
@@ -169,7 +169,7 @@
                     <td>{{ x.firstName }}</td>
                     <td>{{ x.cnp }}</td>
                     <td>{{ x.phone }}</td>
-                    <td>{{ x.idgroup }}</td>
+                    <td>{{ x.groupName }}</td>
                 </tr>
             </table>
 
@@ -207,7 +207,7 @@
             $( "#cnp" ).hide();
             $( "#phone" ).hide();
             $( "#request").hide();
-            $( "#group").hide();
+            $( "#groupName").hide();
             $( "#email" ).val("");
             $( "#password" ).val("");
             $( "#first" ).val("");
@@ -215,7 +215,7 @@
             $( "#permissions" ).val("");
             $( "#cnp" ).val("");
             $( "#phone" ).val("");
-            $( "#group").val("");
+            $( "#groupName").val("");
             $( "#email" )[0].readOnly = false;
         }
 
@@ -230,7 +230,7 @@
             $( "#permissions" ).show();
             $( "#cnp" ).show();
             $( "#phone" ).show();
-            $( "#group").show();
+            $( "#groupName").show();
             $( "#submitbutton" ).text("Add");
             $( "#request").val("add");
         });
@@ -245,7 +245,7 @@
             $( "#permissions" ).show();
             $( "#cnp" ).show();
             $( "#phone" ).show();
-            $( "#group").show();
+            $( "#groupName").show();
             $( "#request").val("update");
             $( "#submitbutton" ).text("Update");
         });
